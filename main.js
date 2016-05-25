@@ -48,10 +48,16 @@ const offset = F.scan(getOffsetStep(STEP, maxOffset), 0, F.merge(clickDirection,
 
 F.on(setOffset($('.carousel-wrapper')), R.map(R.negate, offset));
 
+if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+  $('.left').addEventListener('touchend', clickToLeft);
+  $('.right').addEventListener('touchend', clickToRight);
+  $('.carousel-wrapper').addEventListener('touchstart', touchStart);
+  $('.carousel-wrapper').addEventListener('touchend', touchEnd);
+} else {
+  $('.left').addEventListener('click', clickToLeft);
+  $('.right').addEventListener('click', clickToRight);
+}
+
 $('.carousel-wrapper').style.width = totalItemsWidth() + 'px';
 $('.carousel').classList.add('visible');
 window.addEventListener('resize', windowDims);
-$('.left').addEventListener('click', clickToLeft);
-$('.right').addEventListener('click', clickToRight);
-$('.carousel-wrapper').addEventListener('touchstart', touchStart);
-$('.carousel-wrapper').addEventListener('touchend', touchEnd);
