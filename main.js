@@ -1,7 +1,7 @@
 import F from 'flyd';
 import lift from 'flyd/module/lift';
 import R from 'ramda';
-import {$, $$, getElemCSS, getCarouselWidth, setOffset, map2} from './helper';
+import {$, $$, getElemCSS, getCarouselWidth, setOffset, sequentialy} from './helper';
 
 const getTouchDiff = R.curry((end, start) => Math.abs(end - start) > 10 ? (end < start ? 1 : -1) : 0);
 const getOffsetStep = R.curry((step, maxOffset$, acc, dir) => {
@@ -37,7 +37,7 @@ const maxOffset = lift(R.subtract, totalItemsWidth, carouselWidth);
 const tsx = F.map(R.compose(R.prop('clientX'), R.head, R.prop('touches')), touchStart);
 const tex = F.map(R.compose(R.prop('clientX'), R.head, R.prop('changedTouches')), touchEnd);
 
-const touchDirection = F.map(tex => getTouchDiff(tex, tsx()), tex);
+const touchDirection = sequentialy(getTouchDiff, tex, tsx)
 
 const clickDirection = F.merge(
   F.map(R.always(-1), clickToLeft),
