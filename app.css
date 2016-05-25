@@ -1,0 +1,40 @@
+html, body {
+  margin: 0; padding: 0;
+}
+
+.carousel {
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transition: .3s;
+}
+.carousel.visible {
+  opacity: 1;
+}
+.left,
+.right {
+  background: rgba(190, 190, 190, 0.69);
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 150px;
+}
+.left {
+  left: 10px;
+}
+.right {
+  right: 10px;
+}
+.carousel-wrapper {
+  overflow: hidden;
+  transition: .3s;
+
+}
+.carousel-item {
+  display: inline-block;
+  float: left;
+  margin: 0 5px;
+  width: 200px;
+  height: 200px;
+  background: rgb(204, 231, 187);
+}
