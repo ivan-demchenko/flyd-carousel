@@ -27,7 +27,8 @@
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>
-      System.import('main.js');
+      var lib = window.location.hash.split('=')[1] || 'bacon';
+      System.import('main_' + lib + '.js');
     </script>
   </body>
 </html>
